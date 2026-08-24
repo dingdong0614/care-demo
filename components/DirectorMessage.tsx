@@ -4,7 +4,7 @@ import { SITE_CONFIG } from "@/data/site";
 
 export default function DirectorMessage() {
   return (
-    <section className="relative overflow-hidden border-b border-line">
+    <section className="relative overflow-hidden border-b border-line py-24 md:py-32">
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1774094135149-bbeeb1767bfa?auto=format&fit=crop&w=1600&q=80"
@@ -16,7 +16,7 @@ export default function DirectorMessage() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#1c2015]/88 via-[#1c2015]/55 to-transparent" />
       </div>
 
-      <div className="wrap relative py-24 md:py-32">
+      <div className="wrap relative">
         <RevealOnScroll className="max-w-xl">
           <p className="text-xs tracking-[0.14em] text-cream/70">원장 인사말</p>
           <p className="mt-5 font-display text-[1.7rem] leading-relaxed text-cream md:text-[2.2rem]">
