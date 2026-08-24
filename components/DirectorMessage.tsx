@@ -9,8 +9,8 @@ export default function DirectorMessage() {
         <RevealOnScroll>
           <div className="relative aspect-[3/4] w-full max-w-sm overflow-hidden">
             <Image
-              src="https://images.unsplash.com/photo-1765896387398-1e1ae8d2eb85?auto=format&fit=crop&w=1000&q=80"
-              alt="어르신과 눈을 맞추며 이야기를 나누는 요양보호사"
+              src="https://images.unsplash.com/photo-1774094135149-bbeeb1767bfa?auto=format&fit=crop&w=1000&q=80"
+              alt="환하게 웃는 온담요양원 어르신"
               fill
               sizes="(max-width: 767px) 100vw, 40vw"
               className="object-cover"

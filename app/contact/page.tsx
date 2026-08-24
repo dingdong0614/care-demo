@@ -28,8 +28,8 @@ export default function ContactPage() {
 
             <div className="relative mt-6 aspect-[4/3] w-full overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1766524555239-245d78f3b3a2?auto=format&fit=crop&w=1200&q=80"
-                alt="정원 산책로를 걷는 어르신 부부"
+                src="https://images.unsplash.com/photo-1755397271664-ac02077d6c99?auto=format&fit=crop&w=1200&q=80"
+                alt="손을 잡고 산책로를 걷는 어르신 부부"
                 fill
                 sizes="(max-width: 767px) 100vw, 40vw"
                 className="object-cover"

@@ -12,19 +12,19 @@ export const metadata: Metadata = {
 
 const GALLERY = [
   {
-    caption: "여름맞이 생신잔치",
+    caption: "정겨운 담소",
     image:
-      "https://images.unsplash.com/photo-1764173040044-9835cc696a39?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1778174903051-0b15d54bb451?auto=format&fit=crop&w=1200&q=80",
   },
   {
-    caption: "손을 맞잡고 나누는 안부",
+    caption: "환한 미소",
     image:
-      "https://images.unsplash.com/photo-1454875392665-2ac2c85e8d3e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1526795443948-005b48ce4791?auto=format&fit=crop&w=1200&q=80",
   },
   {
-    caption: "거실에서의 오후",
+    caption: "함께하는 여가시간",
     image:
-      "https://images.unsplash.com/photo-1758691031135-42c95d817486?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1763697038882-aa77b44e7c68?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 

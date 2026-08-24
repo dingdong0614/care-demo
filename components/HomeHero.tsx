@@ -44,8 +44,8 @@ export default function HomeHero() {
         <RevealOnScroll delay={0.2} className="order-1 md:order-2">
           <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-auto md:h-full">
             <Image
-              src="https://images.unsplash.com/photo-1758686254165-b92ad6eb2289?auto=format&fit=crop&w=1400&q=80"
-              alt="볕이 드는 거실에서 담소를 나누는 어르신들"
+              src="https://images.unsplash.com/photo-1540778339538-067eae485e9f?auto=format&fit=crop&w=1400&q=80"
+              alt="가족과 함께 산책하며 담소를 나누는 어르신"
               fill
               priority
               sizes="(max-width: 767px) 100vw, 50vw"

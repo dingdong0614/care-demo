@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "codex-grid-background",
+        "value": "*",
+        "files": [
+          "app/globals.css"
+        ],
+        "createdAt": "2026-08-24T13:23:46.024Z",
+        "reason": "intentional subtle paper-grain dot texture (.grain class, ~3% opacity radial dots), reused from church-demo's established warm/editorial aesthetic pattern for this account, not a generic blueprint/grid decoration"
+      }
+    ]
+  }
+}
