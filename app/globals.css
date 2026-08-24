@@ -1,27 +1,28 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   온담요양원 — Warm Home
-   살구빛 앙버 + 크림 톤 + 올리브모스 보조색
+   온담요양원 — Warm Home (Garden Sage)
+   웜 퍼티 톤 + 세이지 올리브 그린 + 더스티 블루 보조색
+   (크림지+오렌지/레드 계열은 doion의 다른 제작 사이트들과 겹쳐 회피)
    가족·생활 사진 중심, 둥근 세리프로 정서적 안심감
 ------------------------------------------------------------------- */
 
 @theme {
-  --color-bg: #fbf6ee;
-  --color-bg-alt: #f5ecdc;
-  --color-surface: #fffdf8;
+  --color-bg: #f0f0e3;
+  --color-bg-alt: #e5e6d3;
+  --color-surface: #fafaf1;
   --color-surface-raised: #ffffff;
-  --color-line: rgba(58, 42, 30, 0.12);
-  --color-line-strong: rgba(58, 42, 30, 0.22);
-  --color-text: #33261c;
-  --color-text-muted: #74604f;
-  --color-text-faint: #a6937f;
-  --color-accent: #d97a3f;
-  --color-accent-strong: #b35f2c;
-  --color-accent-soft: rgba(217, 122, 63, 0.12);
-  --color-moss: #6f7d4f;
-  --color-moss-soft: rgba(111, 125, 79, 0.14);
-  --color-cream: #f3dfb8;
+  --color-line: rgba(40, 44, 30, 0.12);
+  --color-line-strong: rgba(40, 44, 30, 0.22);
+  --color-text: #292c1f;
+  --color-text-muted: #62654e;
+  --color-text-faint: #94977e;
+  --color-accent: #55663c;
+  --color-accent-strong: #3c4a29;
+  --color-accent-soft: rgba(85, 102, 60, 0.12);
+  --color-slate: #5b7686;
+  --color-slate-soft: rgba(91, 118, 134, 0.14);
+  --color-cream: #f4efdf;
 
   --font-display: "Gowun Batang", "Pretendard", serif;
   --font-body: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -109,6 +110,6 @@ h3 {
   pointer-events: none;
   opacity: 0.5;
   mix-blend-mode: multiply;
-  background-image: radial-gradient(rgba(58, 42, 30, 0.06) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(40, 44, 30, 0.06) 1px, transparent 1px);
   background-size: 3px 3px;
 }
