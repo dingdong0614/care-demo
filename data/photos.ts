@@ -9,7 +9,7 @@ export const unsplash = (id: string, w = 1600) =>
 
 export const PHOTOS = {
   // 인물 사진: 동아시아계 어르신 (UNSPLASH_POOL_ASIAN.md, 대표 지시 2026-09-25)
-  canolaCouple: { id: "photo-1532329683184-6ffd13057d1c", alt: "유채꽃밭에 나란히 선 노부부", credit: "Jaddy Liu", pos: "50% 55%" },
+  canolaCouple: { id: "photo-1532329683184-6ffd13057d1c", alt: "유채꽃밭에 나란히 선 노부부", credit: "Jaddy Liu", pos: "72% 45%" },
   wickerChair: { id: "photo-1651117860079-d59586c1525f", alt: "등나무 의자에 앉아 쉬시는 할머니", credit: "Bryan Li", pos: "55% 50%" },
   thumbsUp: { id: "photo-1634089916298-9fa27180526c", alt: "환하게 웃으며 엄지를 들어 보이는 할머니", credit: "Eduardo Barrios", pos: "50% 35%" },
   flowerEar: { id: "photo-1612691997195-c11c53dc6aa0", alt: "귀에 노란 꽃을 꽂고 웃는 할머니", credit: "Nathalie Gurtler", pos: "50% 35%" },

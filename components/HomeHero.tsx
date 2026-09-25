@@ -11,7 +11,7 @@ export default function HomeHero() {
       <StockImage photo={PHOTOS.canolaCouple} sizes="100vw" priority width={2000} />
       <div
         aria-hidden
-        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,26,18,0.15)_0%,rgba(20,26,18,0.25)_40%,rgba(20,26,18,0.82)_100%)]"
+        className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,26,18,0.55)_0%,rgba(20,26,18,0.15)_55%,transparent_75%),linear-gradient(180deg,rgba(20,26,18,0.1)_0%,rgba(20,26,18,0.2)_45%,rgba(20,26,18,0.8)_100%)]"
       />
       <div className="wrap relative flex min-h-[78svh] flex-col justify-end pb-12 md:min-h-[86vh] md:pb-20">
         <p className="text-[17px] text-[#eef0e8]">
