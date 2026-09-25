@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { QrCode } from "lucide-react";
 import PageHero from "@/components/PageHero";
+import CallBand from "@/components/CallBand";
+import StockImage from "@/components/StockImage";
+import { NoticeItems } from "@/components/NoticeList";
 import { RevealOnScroll } from "@/components/Reveal";
-import { NOTICES } from "@/data/notices";
+import { GALLERY } from "@/data/gallery";
+import { PHOTOS } from "@/data/photos";
 import { SITE_CONFIG } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -10,75 +14,56 @@ export const metadata: Metadata = {
   description: `${SITE_CONFIG.name} 공지사항과 생활 사진을 확인하세요.`,
 };
 
-const GALLERY = [
-  {
-    caption: "정겨운 담소",
-    image:
-      "https://images.unsplash.com/photo-1778174903051-0b15d54bb451?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    caption: "환한 미소",
-    image:
-      "https://images.unsplash.com/photo-1526795443948-005b48ce4791?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    caption: "함께하는 여가시간",
-    image:
-      "https://images.unsplash.com/photo-1763697038882-aa77b44e7c68?auto=format&fit=crop&w=1200&q=80",
-  },
-];
-
 export default function NewsPage() {
   return (
     <>
-      <PageHero crumb="소식" title="온담요양원의 하루" desc="공지사항과 어르신들의 생활 모습을 전해드립니다." />
+      <PageHero
+        crumb="소식"
+        title="온담요양원의 하루"
+        desc="면회 안내, 주간 식단표, 요즘 찍은 사진을 올립니다."
+        photo={PHOTOS.couple}
+      />
 
-      <section className="border-b border-line bg-bg py-16 md:py-24">
-        <div className="wrap max-w-3xl">
-          <RevealOnScroll>
-            <p className="text-xs tracking-[0.14em] text-accent-strong">공지사항</p>
+      <section className="section bg-bg" aria-labelledby="notice-title">
+        <div className="wrap max-w-[960px]">
+          <h2 id="notice-title" className="text-[30px] md:text-[40px]">
+            공지
+          </h2>
+          <p className="mt-3 flex items-start gap-3 text-[17px] text-text-muted">
+            <QrCode aria-hidden size={22} className="mt-0.5 shrink-0 text-accent" />
+            현관·면회실 QR로 들어오셨다면 여기가 맞습니다.
+          </p>
+          <RevealOnScroll delay={0.04} className="mt-8">
+            <NoticeItems />
           </RevealOnScroll>
-          <div className="mt-6 divide-y divide-line border-t border-b border-line">
-            {NOTICES.map((n, i) => (
-              <RevealOnScroll key={n.title} delay={i * 0.06}>
-                <div className="flex flex-wrap items-center justify-between gap-3 py-5">
-                  <div>
-                    <p className="font-display text-lg">{n.title}</p>
-                    <p className="mt-1 text-sm text-text-muted">{n.excerpt}</p>
-                  </div>
-                  <span className="text-sm text-text-faint">{n.date}</span>
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
         </div>
       </section>
 
-      <section className="bg-bg-alt py-16 md:py-24">
+      <section className="section bg-bg-alt" aria-labelledby="gallery-title">
         <div className="wrap">
-          <RevealOnScroll>
-            <p className="text-xs tracking-[0.14em] text-accent-strong">생활 사진</p>
-            <h2 className="mt-3 font-display text-2xl md:text-3xl">어르신들의 소소한 순간들</h2>
-          </RevealOnScroll>
-
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <h2 id="gallery-title" className="text-[30px] md:text-[40px]">
+            요즘 찍은 사진
+          </h2>
+          <div className="mt-10 grid gap-5 md:grid-cols-12">
             {GALLERY.map((g, i) => (
-              <RevealOnScroll key={g.caption} delay={i * 0.08}>
-                <div className="relative aspect-[4/3] w-full overflow-hidden">
-                  <Image
-                    src={g.image}
-                    alt={g.caption}
-                    fill
-                    sizes="(max-width: 767px) 100vw, 33vw"
-                    className="object-cover"
-                  />
-                </div>
-                <p className="mt-3 text-sm text-text-muted">{g.caption}</p>
+              <RevealOnScroll
+                key={g.caption}
+                delay={(i % 2) * 0.05}
+                className={["md:col-span-8", "md:col-span-4 md:mt-20", "md:col-span-5", "md:col-span-7"][i % 4]}
+              >
+                <figure>
+                  <div className={`photo relative overflow-hidden rounded-[6px] ${i === 1 || i === 2 ? "aspect-[4/5]" : "aspect-[3/2]"}`}>
+                    <StockImage photo={g.photo} sizes="(max-width: 767px) 100vw, 60vw" width={1200} />
+                  </div>
+                  <figcaption className="mt-3 text-[17px] text-text-muted">{g.caption}</figcaption>
+                </figure>
               </RevealOnScroll>
             ))}
           </div>
         </div>
       </section>
+
+      <CallBand />
     </>
   );
 }

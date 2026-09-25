@@ -5,7 +5,7 @@ import { usePrefersReducedMotion } from "@/lib/use-media";
 
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.045 } },
+  show: { transition: { staggerChildren: 0.04 } },
 };
 
 const word: Variants = {
@@ -13,7 +13,7 @@ const word: Variants = {
   show: {
     y: "0%",
     opacity: 1,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.42, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -30,14 +30,23 @@ export function RevealHeading({
   delay?: number;
 }) {
   const reducedMotion = usePrefersReducedMotion();
-  const words = text.split(" ");
+  // "\n"으로 줄을 직접 나눌 수 있습니다 (한국어 제목의 어색한 줄바꿈 방지).
+  const lines = text.split("\n").map((l) => l.trim().split(" "));
+  const MotionTag = motion[Tag];
 
   if (reducedMotion) {
-    const MotionTag = motion[Tag];
-    return <MotionTag className={className}>{text}</MotionTag>;
+    return (
+      <MotionTag className={className}>
+        {lines.map((ws, li) => (
+          <span key={li}>
+            {ws.join(" ")}
+            {li < lines.length - 1 && <br />}
+          </span>
+        ))}
+      </MotionTag>
+    );
   }
 
-  const MotionTag = motion[Tag];
   return (
     <MotionTag
       className={className}
@@ -46,20 +55,26 @@ export function RevealHeading({
       animate="show"
       transition={{ delayChildren: delay }}
       style={{ display: "block" }}
+      aria-label={text.replace(/\n/g, " ")}
     >
-      {words.map((w, i) => (
-        <span
-          key={i}
-          style={{
-            display: "inline-block",
-            overflow: "hidden",
-            verticalAlign: "top",
-            marginRight: i < words.length - 1 ? "0.28em" : 0,
-          }}
-        >
-          <motion.span variants={word} style={{ display: "inline-block" }}>
-            {w}
-          </motion.span>
+      {lines.map((ws, li) => (
+        <span key={li} aria-hidden>
+          {ws.map((w, i) => (
+            <span
+              key={i}
+              style={{
+                display: "inline-block",
+                overflow: "hidden",
+                verticalAlign: "top",
+                marginRight: i < ws.length - 1 ? "0.28em" : 0,
+              }}
+            >
+              <motion.span variants={word} style={{ display: "inline-block" }}>
+                {w}
+              </motion.span>
+            </span>
+          ))}
+          {li < lines.length - 1 && <br />}
         </span>
       ))}
     </MotionTag>
@@ -71,7 +86,7 @@ export function RevealOnScroll({
   children,
   className,
   delay = 0,
-  y = 24,
+  y = 16,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -86,8 +101,8 @@ export function RevealOnScroll({
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.36, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </motion.div>

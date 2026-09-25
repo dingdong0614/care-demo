@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { SITE_CONFIG } from "@/data/site";
 
@@ -14,7 +15,7 @@ const SECTIONS = [
       <>
         <p>{SITE_CONFIG.name}(이하 &ldquo;시설&rdquo;)는 홈페이지 문의 폼을 통해 아래 개인정보를 수집합니다.</p>
         <ul className="mt-3 list-disc space-y-1 pl-5">
-          <li>수집 항목: 이름, 연락처(휴대전화번호), 문의 유형, 문의 내용</li>
+          <li>수집 항목: 이름, 연락처(휴대전화번호), 문의 유형, 방문 희망일(선택), 문의 내용</li>
           <li>수집 방법: 홈페이지 문의 폼을 통한 이용자의 자발적 입력</li>
         </ul>
       </>
@@ -54,7 +55,7 @@ const SECTIONS = [
       <>
         <p>시설은 원활한 문의 접수 및 처리를 위해 아래와 같이 개인정보 처리 업무를 위탁하고 있습니다.</p>
         <ul className="mt-3 list-disc space-y-1 pl-5">
-          <li>수탁업체: Web3Forms — 위탁업무 내용: 문의 폼 데이터 전송 및 이메일 알림</li>
+          <li>수탁업체: Web3Forms, 위탁업무 내용: 문의 폼 데이터 전송 및 이메일 알림</li>
         </ul>
       </>
     ),
@@ -85,9 +86,9 @@ const SECTIONS = [
         <li>성명 및 연락처: 대표 문의 채널(하단 참조)을 통해 안내드립니다.</li>
         <li>
           문의: {SITE_CONFIG.contact.email} 또는{" "}
-          <a href="/contact" className="underline">
+          <Link href="/contact" className="text-link">
             문의 페이지
-          </a>
+          </Link>
         </li>
       </ul>
     ),
@@ -111,9 +112,9 @@ export default function PrivacyPage() {
         title="개인정보처리방침"
         desc={`${SITE_CONFIG.name}은 이용자의 개인정보를 소중히 다루며, 관련 법령을 준수합니다.`}
       />
-      <section className="py-16 md:py-24">
+      <section className="section bg-bg">
         <div className="wrap max-w-3xl">
-          <p className="border border-line-strong bg-surface p-5 text-sm text-text-muted">
+          <p className="card p-6 text-[17px] text-text-muted">
             본 페이지는 doion이 정리한 체크리스트를 기반으로 작성된 초안이며, 법적 자문이 아닙니다. 개인정보
             보호책임자 성명·직통 연락처 등 일부 항목은 대표 확인 후 최종 반영이 필요합니다. 최종 게시 전
             전문가 검토를 권장합니다.
@@ -122,13 +123,13 @@ export default function PrivacyPage() {
           <div className="mt-10 space-y-10">
             {SECTIONS.map((s) => (
               <div key={s.title}>
-                <h2 className="font-display text-xl">{s.title}</h2>
-                <div className="mt-3 text-sm leading-relaxed text-text-muted">{s.body}</div>
+                <h2 className="text-[24px]">{s.title}</h2>
+                <div className="mt-3 text-[18px] leading-relaxed text-text-muted">{s.body}</div>
               </div>
             ))}
           </div>
 
-          <p className="mt-12 text-xs text-text-faint">공고일자: 2026-08-24 / 시행일자: 2026-08-24</p>
+          <p className="mt-12 text-[16px] text-text-faint">공고일자: 2026-08-24 / 시행일자: 2026-08-24</p>
         </div>
       </section>
     </>

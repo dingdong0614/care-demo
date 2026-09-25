@@ -1,35 +1,33 @@
-import Image from "next/image";
+import StockImage from "@/components/StockImage";
 import { RevealOnScroll } from "@/components/Reveal";
 import { FACILITIES } from "@/data/facilities";
 
+/** 시설 공간. 크기가 다른 사진 두 줄. */
 export default function FacilityGrid() {
   return (
-    <section className="border-b border-line bg-bg-alt py-16 md:py-24">
+    <section className="section bg-bg-alt">
       <div className="wrap">
         <RevealOnScroll>
-          <p className="text-xs tracking-[0.14em] text-accent-strong">시설안내</p>
-          <h2 className="mt-3 font-display text-2xl md:text-3xl">어르신의 하루가 머무는 공간</h2>
+          <h2 className="text-[30px] md:text-[40px]">어르신이 지내시는 곳</h2>
         </RevealOnScroll>
-
-        <div className="mt-10 grid gap-4 md:grid-cols-3 md:grid-rows-2 md:[&>*:first-child]:col-span-2 md:[&>*:first-child]:row-span-2">
-          {FACILITIES.map((f, i) => (
-            <RevealOnScroll key={f.name} delay={i * 0.08} className="group relative overflow-hidden">
-              <div className={`relative w-full overflow-hidden ${i === 0 ? "aspect-[16/11] md:h-full" : "aspect-[4/3]"}`}>
-                <Image
-                  src={f.image}
-                  alt={f.name}
-                  fill
-                  sizes="(max-width: 767px) 100vw, 40vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-black/0" />
-                <div className="absolute inset-x-0 bottom-0 p-5 text-cream">
-                  <p className="font-display text-lg">{f.name}</p>
-                  <p className="mt-1 max-w-xs text-sm text-cream/85">{f.desc}</p>
-                </div>
-              </div>
-            </RevealOnScroll>
-          ))}
+        <div className="mt-10 grid gap-x-6 gap-y-12 md:grid-cols-12">
+          {FACILITIES.map((f, i) => {
+            const span = ["md:col-span-7", "md:col-span-5 md:mt-16", "md:col-span-5", "md:col-span-7 md:mt-10"][i % 4];
+            const ratio = ["aspect-[4/3]", "aspect-[4/5]", "aspect-[4/5]", "aspect-[4/3]"][i % 4];
+            return (
+              <RevealOnScroll key={f.name} delay={(i % 2) * 0.06} className={span}>
+                <figure>
+                  <div className={`photo relative overflow-hidden rounded-[6px] ${ratio}`}>
+                    <StockImage photo={f.photo} sizes="(max-width: 767px) 100vw, 55vw" width={1200} />
+                  </div>
+                  <figcaption className="mt-4">
+                    <h3 className="text-[23px]">{f.name}</h3>
+                    <p className="mt-1 max-w-[30em] text-text-muted">{f.desc}</p>
+                  </figcaption>
+                </figure>
+              </RevealOnScroll>
+            );
+          })}
         </div>
       </div>
     </section>

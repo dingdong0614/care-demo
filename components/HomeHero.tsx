@@ -1,58 +1,34 @@
-import Image from "next/image";
 import Link from "next/link";
-import { RevealHeading, RevealOnScroll } from "@/components/Reveal";
-import { SITE_CONFIG } from "@/data/site";
+import { Phone } from "lucide-react";
+import StockImage from "@/components/StockImage";
+import { PHOTOS } from "@/data/photos";
+import { SITE_CONFIG, telHref } from "@/data/site";
 
+/** 풀블리드 사진 히어로. 사진 위에 한 줄, 아래쪽에 전화. */
 export default function HomeHero() {
   return (
-    <section className="border-b border-line bg-bg">
-      <div className="wrap grid gap-10 py-14 md:grid-cols-[1fr_1.1fr] md:gap-16 md:py-24">
-        <div className="flex flex-col justify-center order-2 md:order-1">
-          <RevealOnScroll>
-            <p className="text-xs tracking-[0.14em] text-accent-strong">{SITE_CONFIG.name}</p>
-          </RevealOnScroll>
-          <RevealHeading
-            as="h1"
-            text={`내 집 같은 편안함, ${SITE_CONFIG.slogan}`}
-            className="mt-4 font-display text-[2rem] leading-[1.25] md:text-[2.6rem]"
-          />
-          <RevealOnScroll delay={0.15}>
-            <p className="mt-6 max-w-md text-text-muted">
-              {SITE_CONFIG.name}은 어르신 한 분 한 분의 생활 습관과 건강 상태를 살피며 가족처럼
-              돌보는 노인전문요양시설입니다. 처음 상담부터 입소까지 편하게 안내해 드립니다.
-            </p>
-          </RevealOnScroll>
-          <RevealOnScroll delay={0.25} className="mt-8 flex flex-wrap items-center gap-4">
-            <Link
-              href="/admission"
-              className="bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
-            >
-              입소 상담 안내
-            </Link>
-            <Link href="/about" className="text-sm text-text-muted underline underline-offset-4 hover:text-text">
-              시설 소개 보기
-            </Link>
-          </RevealOnScroll>
-
-          <RevealOnScroll delay={0.35} className="mt-10 border border-line-strong bg-surface p-5">
-            <p className="text-xs tracking-[0.1em] text-text-faint">전화 상담</p>
-            <p className="mt-2 font-display text-2xl text-accent-strong">{SITE_CONFIG.contact.phone}</p>
-            <p className="mt-1 text-sm text-text-muted">{SITE_CONFIG.contact.hours}</p>
-          </RevealOnScroll>
+    <section className="relative isolate min-h-[78svh] overflow-hidden bg-forest md:min-h-[86vh]">
+      <StockImage photo={PHOTOS.canolaCouple} sizes="100vw" priority width={2000} />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,26,18,0.15)_0%,rgba(20,26,18,0.25)_40%,rgba(20,26,18,0.82)_100%)]"
+      />
+      <div className="wrap relative flex min-h-[78svh] flex-col justify-end pb-12 md:min-h-[86vh] md:pb-20">
+        <p className="text-[17px] text-[#eef0e8]">
+          {SITE_CONFIG.addressShort.split(" · ")[0]} · {SITE_CONFIG.founded} 문 열었습니다
+        </p>
+        <h1 className="mt-3 max-w-[15em] text-[36px] leading-[1.3] text-white md:text-[58px] md:leading-[1.22]">
+          어머니가 여기서 지내시면 어떨지,
+          <br className="hidden sm:block" /> 먼저 보여 드릴게요.
+        </h1>
+        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+          <a href={telHref} className="btn btn-light !min-h-[58px] !px-6 !text-[19px]">
+            <Phone aria-hidden size={20} /> {SITE_CONFIG.contact.phone}
+          </a>
+          <Link href="#day" className="inline-flex min-h-[48px] items-center text-[18px] text-white underline underline-offset-[6px]">
+            여기서의 하루부터 보기
+          </Link>
         </div>
-
-        <RevealOnScroll delay={0.2} className="order-1 md:order-2">
-          <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-auto md:h-full">
-            <Image
-              src="https://images.unsplash.com/photo-1540778339538-067eae485e9f?auto=format&fit=crop&w=1400&q=80"
-              alt="가족과 함께 산책하며 담소를 나누는 어르신"
-              fill
-              priority
-              sizes="(max-width: 767px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
-        </RevealOnScroll>
       </div>
     </section>
   );

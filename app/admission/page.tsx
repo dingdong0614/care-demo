@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Check, ChevronDown } from "lucide-react";
 import PageHero from "@/components/PageHero";
+import CallBand from "@/components/CallBand";
+import StockImage from "@/components/StockImage";
 import { RevealOnScroll } from "@/components/Reveal";
+import { COSTS, COST_NOTE, DOCUMENTS, STEPS } from "@/data/admission";
+import { PHOTOS } from "@/data/photos";
 import { SITE_CONFIG } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -9,82 +13,119 @@ export const metadata: Metadata = {
   description: `${SITE_CONFIG.name} 입소 대상, 절차, 비용, 필요서류를 안내합니다.`,
 };
 
-const STEPS = [
-  { step: "1", title: "전화 상담", desc: "어르신 상태와 장기요양등급을 확인하고 궁금한 점을 상담합니다." },
-  { step: "2", title: "시설 견학", desc: "생활 공간과 프로그램실을 직접 둘러보실 수 있습니다." },
-  { step: "3", title: "서류 접수", desc: "장기요양인정서 등 필요서류를 접수하고 입소를 확정합니다." },
-  { step: "4", title: "입소 및 적응", desc: "담당 요양보호사가 배정되어 초기 적응을 함께 돕습니다." },
+/** 보호자가 전화로 가장 자주 묻는 질문을 먼저 답해 둡니다. 사실만 적고 모르는 값은 상담으로 넘깁니다. */
+const FAQ = [
+  {
+    q: "장기요양등급이 아직 없으면 어떻게 하나요?",
+    a: "등급은 국민건강보험공단에 장기요양인정을 신청해 받습니다. 신청 방법과 준비할 것을 전화로 편하게 안내해 드립니다.",
+  },
+  {
+    q: "3~5등급도 입소할 수 있나요?",
+    a: "시설 입소 가능 여부는 등급과 어르신의 상황에 따라 달라, 상담을 통해 개별 확인해 드립니다.",
+  },
+  {
+    q: "평가등급이 어떻게 되세요?",
+    a: SITE_CONFIG.grade
+      ? `국민건강보험공단 장기요양기관 평가 결과 ${SITE_CONFIG.grade}입니다. 노인장기요양보험 누리집(longtermcare.or.kr)에서도 확인하실 수 있습니다.`
+      : "국민건강보험공단이 공개한 평가 결과를 이 자리에 그대로 적습니다(데모 사이트라 비워 두었습니다). 노인장기요양보험 누리집(longtermcare.or.kr)에서도 직접 확인하실 수 있습니다.",
+  },
+  {
+    q: "면회는 언제 할 수 있나요?",
+    a: "면회 시간과 예약 방법은 소식 게시판 공지로 올려 둡니다. 명절처럼 바뀌는 때에는 따로 공지합니다.",
+  },
+  {
+    q: "이번 주 식단은 어디서 보나요?",
+    a: "주간 식단표를 매주 소식 게시판에 올립니다.",
+  },
+  {
+    q: "정확한 월 비용은 얼마인가요?",
+    a: COST_NOTE,
+  },
 ];
 
-const COSTS = [
-  { grade: "장기요양 1등급", desc: "본인부담금 약 20% (기초생활수급자·차상위 경감 별도 적용)" },
-  { grade: "장기요양 2등급", desc: "본인부담금 약 20% (기초생활수급자·차상위 경감 별도 적용)" },
-  { grade: "장기요양 3~5등급", desc: "시설 입소 가능 여부는 상담을 통해 개별 확인해 드립니다." },
-];
-
-const DOCUMENTS = [
-  "장기요양인정서 및 개인별장기요양이용계획서",
-  "건강진단서 (최근 1개월 이내)",
-  "기초생활수급자증명서 또는 차상위 확인서 (해당 시)",
-  "신분증 사본 (본인 및 보호자)",
-];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
 
 export default function AdmissionPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <PageHero
         crumb="입소안내"
         title="상담부터 입소까지, 차근차근"
-        desc="장기요양등급 확인부터 서류 준비까지 처음이어도 어렵지 않게 안내해 드립니다."
+        desc="장기요양등급 확인부터 서류 준비까지, 처음이셔도 됩니다."
+        photo={PHOTOS.tileCouple}
       />
 
-      <section className="border-b border-line bg-bg py-16 md:py-24">
-        <div className="wrap">
+      <section className="section bg-bg" aria-labelledby="steps-title">
+        <div className="wrap grid gap-12 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
           <RevealOnScroll>
-            <p className="text-xs tracking-[0.14em] text-accent-strong">입소 절차</p>
-            <h2 className="mt-3 font-display text-2xl md:text-3xl">4단계로 진행됩니다</h2>
+            <h2 id="steps-title" className="text-[30px] md:text-[40px]">
+              입소는 네 번에 나눠 진행합니다
+            </h2>
+            <div className="photo relative mt-8 hidden aspect-[4/3] overflow-hidden rounded-[6px] md:block">
+              <StockImage photo={PHOTOS.redVest} sizes="40vw" width={1000} />
+            </div>
           </RevealOnScroll>
-
-          <div className="mt-10 grid gap-4 md:grid-cols-4">
-            {STEPS.map((s, i) => (
-              <RevealOnScroll key={s.step} delay={i * 0.08}>
-                <div className="h-full border border-line-strong bg-surface p-7">
-                  <span className="font-display text-3xl text-accent-strong">{s.step}</span>
-                  <p className="mt-4 font-display text-lg">{s.title}</p>
-                  <p className="mt-2 text-sm text-text-muted">{s.desc}</p>
-                </div>
-              </RevealOnScroll>
+          <ol className="border-t border-line">
+            {STEPS.map((s) => (
+              <li key={s.step} className="border-b border-line py-7">
+                <RevealOnScroll className="grid grid-cols-[56px_1fr] gap-4">
+                  <span aria-hidden className="font-display text-[34px] leading-none font-bold text-accent">
+                    {s.step}
+                  </span>
+                  <div>
+                    <h3 className="text-[23px]">
+                      <span className="sr-only">{s.step}단계 </span>
+                      {s.title}
+                    </h3>
+                    <p className="mt-1.5 text-text-muted">{s.desc}</p>
+                  </div>
+                </RevealOnScroll>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      <section className="border-b border-line bg-bg-alt py-16 md:py-24">
-        <div className="wrap grid gap-10 md:grid-cols-2 md:gap-16">
+      <section id="cost" className="section scroll-mt-24 bg-bg-alt" aria-labelledby="cost-title">
+        <div className="wrap grid gap-14 md:grid-cols-[1.1fr_0.9fr] md:gap-20">
           <RevealOnScroll>
-            <p className="text-xs tracking-[0.14em] text-accent-strong">비용 안내</p>
-            <p className="mt-3 font-display text-2xl">장기요양보험 등급별 본인부담금</p>
-            <ul className="mt-6 divide-y divide-line border-t border-b border-line">
-              {COSTS.map((c) => (
-                <li key={c.grade} className="py-4">
-                  <p className="font-display text-lg">{c.grade}</p>
-                  <p className="mt-1 text-sm text-text-muted">{c.desc}</p>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 text-xs text-text-faint">
-              실제 본인부담금은 등급, 감경 여부, 식비·상급침실 이용 등에 따라 달라질 수 있어 상담을 통해
-              정확히 안내해 드립니다.
-            </p>
+            <h2 id="cost-title" className="text-[30px] md:text-[40px]">
+              등급별 본인부담금
+            </h2>
+            <table className="mt-8 w-full border-collapse text-left">
+              <thead>
+                <tr className="border-b-2 border-text text-[16px] text-text-muted">
+                  <th scope="col" className="py-3 font-semibold">등급</th>
+                  <th scope="col" className="py-3 font-semibold">내용</th>
+                  <th scope="col" className="py-3 text-right font-semibold">본인부담</th>
+                </tr>
+              </thead>
+              <tbody>
+                {COSTS.map((c) => (
+                  <tr key={c.grade} className="border-b border-line align-top">
+                    <th scope="row" className="py-5 pr-4 text-[18px] font-semibold whitespace-nowrap">
+                      {c.grade.replace("장기요양 ", "")}
+                    </th>
+                    <td className="py-5 pr-4 text-[17px] text-text-muted">{c.desc}</td>
+                    <td className="py-5 text-right font-display text-[22px] font-bold whitespace-nowrap text-accent">{c.share}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="mt-5 text-[17px] text-text-muted">{COST_NOTE}</p>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={0.1}>
-            <p className="text-xs tracking-[0.14em] text-accent-strong">필요 서류</p>
-            <p className="mt-3 font-display text-2xl">입소 시 준비해 주세요</p>
-            <ul className="mt-6 space-y-3 text-sm text-text-muted">
+          <RevealOnScroll delay={0.06}>
+            <h2 className="text-[30px] md:text-[40px]">입소 날 챙겨 오실 서류</h2>
+            <ul className="mt-8 space-y-4">
               {DOCUMENTS.map((d) => (
-                <li key={d} className="flex gap-3">
-                  <span className="text-accent-strong">·</span>
+                <li key={d} className="flex gap-4 text-[18px]">
+                  <Check aria-hidden size={24} strokeWidth={2.5} className="mt-0.5 shrink-0 text-accent" />
                   <span>{d}</span>
                 </li>
               ))}
@@ -93,20 +134,31 @@ export default function AdmissionPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
-        <RevealOnScroll className="wrap flex flex-col items-start gap-5 border border-line-strong bg-surface p-9 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p className="font-display text-xl">장기요양등급이 아직 없으신가요?</p>
-            <p className="mt-2 text-sm text-text-muted">등급 신청 절차부터 전화로 편하게 안내해 드립니다.</p>
+      <section className="section bg-bg" aria-labelledby="faq-title">
+        <div className="wrap max-w-[860px]">
+          <RevealOnScroll>
+            <h2 id="faq-title" className="text-[30px] md:text-[40px]">
+              전화로 제일 많이 물으시는 것
+            </h2>
+          </RevealOnScroll>
+          <div className="mt-8 divide-y divide-line border-y border-line">
+            {FAQ.map((f) => (
+              <details key={f.q} className="group py-2">
+                <summary className="flex min-h-[64px] cursor-pointer list-none items-center justify-between gap-4 text-[20px] font-semibold [&::-webkit-details-marker]:hidden">
+                  {f.q}
+                  <ChevronDown aria-hidden size={24} className="shrink-0 text-accent transition-transform duration-200 group-open:rotate-180" />
+                </summary>
+                <p className="pb-5 text-text-muted">{f.a}</p>
+              </details>
+            ))}
           </div>
-          <Link
-            href="/contact"
-            className="shrink-0 bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
-          >
-            상담 문의하기
-          </Link>
-        </RevealOnScroll>
+        </div>
       </section>
+
+      <CallBand
+        title="등급이 아직 없으셔도 전화 주세요"
+        desc="등급 신청 절차부터 전화로 안내해 드립니다. 어르신 상황을 들어 보고 방법을 같이 찾겠습니다."
+      />
     </>
   );
 }

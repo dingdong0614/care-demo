@@ -1,52 +1,53 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   온담요양원 — Warm Home (Garden Sage)
-   웜 퍼티 톤 + 세이지 올리브 그린 + 더스티 블루 보조색
-   (크림지+오렌지/레드 계열은 doion의 다른 제작 사이트들과 겹쳐 회피)
-   가족·생활 사진 중심, 둥근 세리프로 정서적 안심감
+   온담요양원 (영업용 데모) 디자인 토큰, 2026-09 리워크
+   방향: 밝은 아이보리 + 따뜻한 린넨 중성색 + 차분한 숲녹색 강조 하나.
+   읽는 사람은 40~60대 자녀 세대: 본문 18px, 대비 4.5:1 이상, 터치 48px.
+   제목은 Gowun Batang(세리프, OFL), 본문·UI는 Pretendard(OFL). 둘 다 셀프호스팅.
 ------------------------------------------------------------------- */
 
 @theme {
-  --color-bg: #f0f0e3;
-  --color-bg-alt: #e5e6d3;
-  --color-surface: #fafaf1;
-  --color-surface-raised: #ffffff;
-  --color-line: rgba(40, 44, 30, 0.12);
-  --color-line-strong: rgba(40, 44, 30, 0.22);
-  --color-text: #292c1f;
-  --color-text-muted: #62654e;
-  --color-text-faint: #94977e;
-  --color-accent: #55663c;
-  --color-accent-strong: #3c4a29;
-  --color-accent-soft: rgba(85, 102, 60, 0.12);
-  --color-slate: #5b7686;
-  --color-slate-soft: rgba(91, 118, 134, 0.14);
-  --color-cream: #f4efdf;
+  --color-bg: #fbf8f2;
+  --color-bg-alt: #f3ede3;
+  --color-sand: #e9dfcf;
+  --color-surface: #ffffff;
+  --color-line: rgba(52, 44, 30, 0.12);
+  --color-line-strong: rgba(52, 44, 30, 0.22);
+  --color-text: #23241e;
+  --color-text-muted: #4b4d43;
+  --color-text-faint: #63655a;
+  --color-accent: #2f5a3f;
+  --color-accent-strong: #234630;
+  --color-accent-soft: #e3ebe2;
+  --color-on-accent: #ffffff;
+  --color-cream: #fbf8f2;
+  --color-forest: #1f3a29;
 
-  --font-display: "Gowun Batang", "Pretendard", serif;
-  --font-body: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "Gowun Batang", "Pretendard Variable", serif;
+  --font-body: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", sans-serif;
 
-  --content-max: 1180px;
+  --radius-card: 18px;
+  --radius-soft: 12px;
+
   --ease-out-quiet: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+:root {
+  --content-max: 1200px;
+  --section-y: clamp(64px, 9vw, 120px);
+  --dur: 240ms;
+}
+
+@layer base {
 * {
   box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: auto; /* Lenis가 스무스 스크롤을 담당 */
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  scroll-behavior: auto; /* Lenis가 스무스 스크롤 담당 */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -54,10 +55,11 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: 18px;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 img {
@@ -69,17 +71,109 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
   margin: 0;
   color: var(--color-text);
   word-break: keep-all;
 }
 
+p {
+  margin: 0;
+}
+
+}
+
+@layer components {
 .wrap {
+  width: 100%;
   max-width: var(--content-max);
   margin: 0 auto;
+  padding-inline: 20px;
+}
+@media (min-width: 768px) {
+  .wrap {
+    padding-inline: 32px;
+  }
+}
+
+.section {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+}
+
+.h2 {
+  font-size: clamp(28px, 3.4vw, 40px);
+}
+
+/* 버튼: 큰 터치 영역, 행동 문구와 함께 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
   padding: 0 24px;
+  border-radius: 999px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    transform var(--dur) var(--ease-out-quiet),
+    background-color var(--dur) var(--ease-out-quiet),
+    box-shadow var(--dur) var(--ease-out-quiet);
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn-primary {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: 0 6px 18px rgba(35, 70, 48, 0.18);
+}
+.btn-primary:hover {
+  background: var(--color-accent-strong);
+}
+.btn-ghost {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1.5px solid var(--color-line-strong);
+}
+.btn-ghost:hover {
+  border-color: var(--color-accent);
+}
+.btn-light {
+  background: var(--color-cream);
+  color: var(--color-forest);
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+
+.text-link {
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+.text-link:hover {
+  color: var(--color-accent-strong);
 }
 
 .sr-only {
@@ -95,21 +189,36 @@ h3 {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 3px solid var(--color-accent);
   outline-offset: 3px;
+  border-radius: 6px;
 }
 
-/* 종이 텍스처 오버레이 — 히어로/서브페이지 배경에 은은하게 사용 */
-.grain {
+/* 사진 자리: 이미지 로딩 전·실패 시에도 레이아웃 유지 */
+.photo {
   position: relative;
+  overflow: hidden;
+  background: var(--color-sand);
 }
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.5;
-  mix-blend-mode: multiply;
-  background-image: radial-gradient(rgba(40, 44, 30, 0.06) 1px, transparent 1px);
-  background-size: 3px 3px;
+
+}
+
+/* 모바일 하단 고정 행동 바 높이만큼 여백 */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 76px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .btn:hover {
+    transform: none;
+  }
 }

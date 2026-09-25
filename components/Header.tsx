@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { SITE_CONFIG } from "@/data/site";
+import { Menu, Phone, X } from "lucide-react";
+import { SITE_CONFIG, telHref } from "@/data/site";
 
 const NAV_LINKS = [
   { href: "/about", label: "시설소개" },
-  { href: "/admission", label: "입소안내" },
+  { href: "/admission", label: "입소·비용 안내" },
   { href: "/news", label: "소식" },
-  { href: "/contact", label: "문의" },
+  { href: "/contact", label: "상담 예약" },
 ];
 
 export default function Header() {
@@ -34,91 +35,82 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-[100] border-b transition-colors ${
-        scrolled ? "border-line bg-bg/90 backdrop-blur-md" : "border-transparent bg-bg/60 backdrop-blur-sm"
+      className={`sticky top-0 z-[100] border-b bg-bg/95 transition-[border-color,box-shadow] duration-200 md:bg-bg/90 md:backdrop-blur-md ${
+        scrolled ? "border-line shadow-[0_4px_20px_rgba(52,44,30,0.06)]" : "border-transparent"
       }`}
     >
-      <div className="wrap flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <span className="grid h-8 w-8 place-items-center rounded-full border border-line-strong font-display text-sm text-accent-strong">
+      <div className="wrap flex h-[72px] items-center justify-between gap-4 md:h-20">
+        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={`${SITE_CONFIG.name} 홈`}>
+          <span
+            aria-hidden
+            className="grid h-10 w-10 place-items-center rounded-full bg-accent font-display text-lg font-bold text-on-accent"
+          >
             온
           </span>
-          <span className="font-display text-lg tracking-wide">{SITE_CONFIG.name}</span>
+          <span className="font-display text-[22px] font-bold tracking-tight">{SITE_CONFIG.name}</span>
         </Link>
 
-        <nav aria-label="주요 메뉴" className="hidden md:flex items-center gap-8 text-[15px] text-text-muted">
+        <nav aria-label="주요 메뉴" className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative py-2 transition-colors ${
-                  isActive ? "text-accent-strong" : "hover:text-text"
+                aria-current={isActive ? "page" : undefined}
+                className={`px-4 py-2.5 text-[17px] font-medium underline-offset-[10px] transition-colors ${
+                  isActive ? "text-accent-strong underline decoration-2" : "text-text-muted hover:text-text"
                 }`}
               >
                 {link.label}
-                {isActive && <span className="absolute -bottom-px left-0 right-0 h-px bg-accent-strong" />}
               </Link>
             );
           })}
         </nav>
 
-        <a
-          href={`tel:${SITE_CONFIG.contact.phone.replace(/-/g, "")}`}
-          className="hidden md:inline-flex items-center gap-2 bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
-        >
-          <span aria-hidden>☎</span> {SITE_CONFIG.contact.phone}
-        </a>
+        <div className="flex items-center gap-2">
+          <a href={telHref} className="btn btn-primary hidden !min-h-[48px] !px-5 !text-[17px] md:inline-flex">
+            <Phone aria-hidden size={18} strokeWidth={2.2} />
+            <span>
+              <span className="sr-only">전화 상담 </span>
+              {SITE_CONFIG.contact.phone}
+            </span>
+          </a>
 
-        <button
-          type="button"
-          aria-expanded={open}
-          aria-controls="mobileNav"
-          onClick={() => setOpen((v) => !v)}
-          className="md:hidden relative h-9 w-9 shrink-0"
-        >
-          <span className="sr-only">메뉴 열기</span>
-          <span
-            className={`absolute left-1/2 top-1/2 h-px w-6 -translate-x-1/2 bg-text transition-transform ${
-              open ? "translate-y-0 rotate-45" : "-translate-y-2"
-            }`}
-          />
-          <span
-            className={`absolute left-1/2 top-1/2 h-px w-6 -translate-x-1/2 bg-text transition-opacity ${
-              open ? "opacity-0" : "opacity-100"
-            }`}
-          />
-          <span
-            className={`absolute left-1/2 top-1/2 h-px w-6 -translate-x-1/2 bg-text transition-transform ${
-              open ? "translate-y-0 -rotate-45" : "translate-y-2"
-            }`}
-          />
-        </button>
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls="mobileNav"
+            onClick={() => setOpen((v) => !v)}
+            className="grid h-12 w-12 place-items-center rounded-full border border-line-strong bg-surface lg:hidden"
+          >
+            <span className="sr-only">{open ? "메뉴 닫기" : "메뉴 열기"}</span>
+            {open ? <X aria-hidden size={22} /> : <Menu aria-hidden size={22} />}
+          </button>
+        </div>
       </div>
 
       <nav
         id="mobileNav"
         aria-label="모바일 메뉴"
-        className={`md:hidden overflow-hidden border-t border-line bg-bg transition-[max-height] duration-300 ${
-          open ? "max-h-[320px]" : "max-h-0 border-t-0"
-        }`}
+        hidden={!open}
+        className="border-t border-line bg-bg lg:hidden"
       >
-        <div className="wrap flex flex-col gap-1 py-4 text-[15px]">
+        <div className="wrap flex flex-col py-3">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`py-2.5 ${pathname === link.href ? "text-accent-strong" : "text-text-muted"}`}
+              aria-current={pathname === link.href ? "page" : undefined}
+              className={`flex min-h-[56px] items-center border-b border-line text-[19px] font-medium ${
+                pathname === link.href ? "text-accent-strong" : "text-text"
+              }`}
             >
               {link.label}
             </Link>
           ))}
-          <a
-            href={`tel:${SITE_CONFIG.contact.phone.replace(/-/g, "")}`}
-            className="mt-2 bg-accent py-2.5 text-center text-sm font-semibold text-white"
-          >
-            ☎ {SITE_CONFIG.contact.phone}
+          <a href={telHref} className="btn btn-primary mt-4 w-full">
+            <Phone aria-hidden size={20} /> {SITE_CONFIG.contact.phone} 전화하기
           </a>
         </div>
       </nav>
