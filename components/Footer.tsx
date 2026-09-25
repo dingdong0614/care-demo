@@ -16,7 +16,7 @@ export default function Footer() {
     <footer className="border-t border-line bg-bg-alt">
       <div className="wrap grid gap-10 py-14 md:grid-cols-[1.3fr_1fr_1fr] md:py-16">
         <div>
-          <p className="font-display text-[24px] font-bold">{SITE_CONFIG.name}</p>
+          <p className="text-[22px] font-semibold tracking-[-0.02em]">{SITE_CONFIG.name}</p>
           <p className="mt-2 text-[17px] text-text-muted">{SITE_CONFIG.slogan}</p>
           <a href={telHref} className="mt-5 inline-block font-display text-[28px] font-bold text-accent">
             {SITE_CONFIG.contact.phone}

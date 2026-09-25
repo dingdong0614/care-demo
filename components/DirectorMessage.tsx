@@ -15,7 +15,7 @@ export default function DirectorMessage() {
         </RevealOnScroll>
         <RevealOnScroll delay={0.06} className="order-1 md:order-2 md:pt-10">
           <blockquote>
-            <p className="font-display text-[28px] leading-[1.55] font-bold md:text-[38px]">
+            <p className="text-[28px] leading-[1.45] font-semibold tracking-[-0.025em] md:text-[36px]">
               &ldquo;제 부모님을 모신다는 마음으로, 오늘도 어르신 곁을 지킵니다.&rdquo;
             </p>
           </blockquote>
@@ -24,7 +24,7 @@ export default function DirectorMessage() {
             기억하는 걸 먼저 생각합니다.
           </p>
           <p className="mt-6 text-[19px]">
-            <span className="font-display font-bold">{SITE_CONFIG.directorName}</span>
+            <span className="font-semibold">{SITE_CONFIG.directorName}</span>
             <Link href="/about" className="text-link ml-5 inline-flex min-h-[48px] items-center">
               인사말 전문
             </Link>

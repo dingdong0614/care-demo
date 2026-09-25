@@ -46,7 +46,7 @@ export default function AboutPage() {
               </p>
               <p>언제든 편하게 방문하시어 시설을 직접 둘러봐 주세요.</p>
             </div>
-            <p className="mt-8 font-display text-[22px] font-bold">{SITE_CONFIG.directorName}</p>
+            <p className="mt-8 text-[20px] font-semibold">{SITE_CONFIG.directorName}</p>
           </RevealOnScroll>
 
           <RevealOnScroll delay={0.06}>

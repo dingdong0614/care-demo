@@ -43,11 +43,11 @@ export default function Header() {
         <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={`${SITE_CONFIG.name} 홈`}>
           <span
             aria-hidden
-            className="grid h-10 w-10 place-items-center rounded-full bg-accent font-display text-lg font-bold text-on-accent"
+            className="grid h-10 w-10 place-items-center rounded-full bg-accent text-[17px] font-semibold text-on-accent"
           >
             온
           </span>
-          <span className="font-display text-[22px] font-bold tracking-tight">{SITE_CONFIG.name}</span>
+          <span className="text-[21px] font-semibold tracking-[-0.025em]">{SITE_CONFIG.name}</span>
         </Link>
 
         <nav aria-label="주요 메뉴" className="hidden items-center gap-1 lg:flex">

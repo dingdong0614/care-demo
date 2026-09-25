@@ -4,7 +4,7 @@
    온담요양원 (영업용 데모) 디자인 토큰, 2026-09 리워크
    방향: 밝은 아이보리 + 따뜻한 린넨 중성색 + 차분한 숲녹색 강조 하나.
    읽는 사람은 40~60대 자녀 세대: 본문 18px, 대비 4.5:1 이상, 터치 48px.
-   제목은 Gowun Batang(세리프, OFL), 본문·UI는 Pretendard(OFL). 둘 다 셀프호스팅.
+   폰트는 Pretendard Variable 1종(OFL, 셀프호스팅). 위계는 굵기·크기·자간으로만 만든다.
 ------------------------------------------------------------------- */
 
 @theme {
@@ -24,7 +24,8 @@
   --color-cream: #fbf8f2;
   --color-forest: #1f3a29;
 
-  --font-display: "Gowun Batang", "Pretendard Variable", serif;
+  --font-display: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", sans-serif;
   --font-body: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Malgun Gothic", sans-serif;
 
@@ -56,7 +57,11 @@ body {
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: 18px;
-  line-height: 1.75;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: -0.005em;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
   overflow-wrap: anywhere;
@@ -71,9 +76,9 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.028em;
+  line-height: 1.25;
   margin: 0;
   color: var(--color-text);
   word-break: keep-all;
@@ -220,5 +225,13 @@ p {
   }
   .btn:hover {
     transform: none;
+  }
+}
+
+/* 숫자(시간·전화·비율)는 고정폭 숫자로 줄을 맞춘다. 모노 폰트는 쓰지 않는다. */
+@layer utilities {
+  .font-display {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
   }
 }

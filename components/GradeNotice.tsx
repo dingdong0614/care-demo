@@ -12,7 +12,7 @@ export default function GradeNotice() {
       <RevealOnScroll className="wrap grid gap-8 md:grid-cols-[auto_1fr] md:items-center md:gap-16">
         <div className="md:border-r md:border-white/20 md:pr-16">
           <p className="text-[17px] text-[#cfe0d2]">장기요양기관 평가 결과</p>
-          <p className="mt-2 font-display text-[40px] leading-tight font-bold text-white md:text-[52px]">
+          <p className="mt-2 font-display text-[38px] leading-tight font-semibold text-white md:text-[48px]">
             {SITE_CONFIG.grade || "등급 게시 자리"}
           </p>
         </div>

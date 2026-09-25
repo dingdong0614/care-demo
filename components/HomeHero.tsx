@@ -17,7 +17,7 @@ export default function HomeHero() {
         <p className="text-[17px] text-[#eef0e8]">
           {SITE_CONFIG.addressShort.split(" · ")[0]} · {SITE_CONFIG.founded} 문 열었습니다
         </p>
-        <h1 className="mt-3 max-w-[15em] text-[36px] leading-[1.3] text-white md:text-[58px] md:leading-[1.22]">
+        <h1 className="mt-3 max-w-[15em] text-[34px] leading-[1.25] text-white md:text-[56px] md:leading-[1.18]">
           어머니가 여기서 지내시면 어떨지,
           <br className="hidden sm:block" /> 먼저 보여 드릴게요.
         </h1>

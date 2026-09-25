@@ -9,9 +9,9 @@ export default function GuardianIntro() {
     <section className="section bg-bg">
       <div className="wrap grid gap-10 md:grid-cols-[1.35fr_0.65fr] md:items-end md:gap-20">
         <RevealOnScroll>
-          <h2 className="max-w-[18em] text-[28px] leading-[1.5] font-normal md:text-[38px]">
+          <h2 className="max-w-[18em] text-[26px] leading-[1.5] font-medium tracking-[-0.025em] md:text-[34px]">
             요양원은 대부분 몇 군데를 비교해 보고 정하십니다. 그래서 전화 드리기 전에 보실 수 있게,{" "}
-            <span className="font-bold text-accent">사진과 하루 일과, 비용, 평가 결과</span>를 여기에 다 올려
+            <span className="font-semibold text-accent">사진과 하루 일과, 비용, 평가 결과</span>를 여기에 다 올려
             두었습니다.
           </h2>
           <p className="mt-8 max-w-[34em] text-text-muted">

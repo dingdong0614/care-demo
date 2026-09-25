@@ -37,7 +37,7 @@ export default function PageHero({
         <RevealHeading
           as="h1"
           text={title}
-          className={`mt-3 max-w-[16em] text-[34px] leading-[1.28] md:text-[50px] ${onPhoto ? "!text-white" : ""}`}
+          className={`mt-3 max-w-[16em] text-[32px] leading-[1.22] md:text-[48px] ${onPhoto ? "!text-white" : ""}`}
         />
         <p className={`mt-4 max-w-[34em] text-[19px] ${onPhoto ? "text-[#eef0e8]" : "text-text-muted"}`}>{desc}</p>
       </div>

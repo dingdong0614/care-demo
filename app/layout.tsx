@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
-import "@fontsource/gowun-batang/400.css";
-import "@fontsource/gowun-batang/700.css";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
