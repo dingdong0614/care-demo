@@ -176,7 +176,7 @@ export default function ContactForm() {
         </label>
         <p className="mt-3 text-[16px] leading-relaxed text-text-muted">
           수집 항목: 이름, 연락처, 문의 유형, 방문 희망일, 문의 내용 · 수집 목적: 입소 상담 및 문의 응대 · 보유 기간:
-          문의 처리 완료 후 즉시 파기. 동의를 거부할 수 있으나, 미동의 시 문의 접수가 제한됩니다. 자세한 내용은{" "}
+          문의 처리 완료 후 1년 · 국외 이전: 문의 접수·호스팅을 위해 Web3Forms(인도)·Vercel(미국)로 전송. 동의를 거부할 수 있으나, 미동의 시 문의 접수가 제한됩니다. 자세한 내용은{" "}
           <Link href="/privacy" className="text-link">
             개인정보처리방침
           </Link>
